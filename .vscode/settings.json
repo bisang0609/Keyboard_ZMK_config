@@ -1,0 +1,16 @@
+{
+  "git.autoRepositoryDetection": false,
+  "git.scanRepositories": [
+    "Keyboard_ZMK_config"
+  ],
+  "files.exclude": {
+    "**/build": true
+  },
+  "search.exclude": {
+    "**/build": true,
+    "**/zmk": true,
+    "**/zephyr": true,
+    "**/modules": true,
+    "**/bootloader": true
+  }
+}

@@ -1,0 +1,10 @@
+file_format: "1"
+id: tomak79_left
+name: Tomak79 Left
+type: shield
+requires:
+  - pro_micro
+siblings:
+  - tomak79_left
+  - tomak79_right
+  - tomak79_dongle

@@ -1,0 +1,11 @@
+file_format: "1"
+id: tomak79
+name: Tomak79
+type: shield
+url: https://github.com/bisang0609/zmk-config
+requires:
+  - pro_micro
+siblings:
+  - tomak79_left
+  - tomak79_right
+  - tomak79_dongle

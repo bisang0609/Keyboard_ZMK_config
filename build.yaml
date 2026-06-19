@@ -1,0 +1,13 @@
+---
+include:
+  - board: nice_nano_v2
+    shield: tomak79_left
+    artifact-name: tomak79_left
+
+  - board: nice_nano_v2
+    shield: tomak79_right
+    artifact-name: tomak79_right
+
+  - board: nice_nano_v2
+    shield: tomak79_dongle
+    artifact-name: tomak79_dongle

@@ -1,0 +1,13 @@
+#include "tomak79.dtsi"
+#include "tomak79_left.dtsi"
+
+/ {
+    chosen {
+        zmk,underglow = &led_strip;
+        zmk,physical-layout = &physical_layout0;
+    };
+};
+
+&physical_layout0 {
+    kscan = <&kscan0>;
+};

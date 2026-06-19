@@ -1,0 +1,19 @@
+if SHIELD_TOMAK79_LEFT || SHIELD_TOMAK79_RIGHT || SHIELD_TOMAK79_DONGLE
+
+config ZMK_KEYBOARD_NAME
+    default "Tomak79"
+
+config ZMK_SPLIT
+    default y
+
+if ZMK_DISPLAY
+
+config I2C
+    default y
+
+config SSD1306
+    default y
+
+endif # ZMK_DISPLAY
+
+endif
