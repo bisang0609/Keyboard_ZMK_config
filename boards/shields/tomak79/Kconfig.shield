@@ -6,3 +6,15 @@ config SHIELD_TOMAK79_RIGHT
 
 config SHIELD_TOMAK79_DONGLE
     def_bool $(shields_list_contains,tomak79_dongle)
+
+config SHIELD_TOMAK79_DONGLE_USBFIX
+    def_bool $(shields_list_contains,tomak79_dongle_usbfix)
+
+config SHIELD_TOMAK79_DONGLE_SSD1306_MIN
+    def_bool $(shields_list_contains,tomak79_dongle_ssd1306_min)
+
+config SHIELD_TOMAK79_DONGLE_SSD1306_PLAIN
+    def_bool $(shields_list_contains,tomak79_dongle_ssd1306_plain)
+
+config SHIELD_TOMAK79_DONGLE_SH1106_MIN
+    def_bool $(shields_list_contains,tomak79_dongle_sh1106_min)
