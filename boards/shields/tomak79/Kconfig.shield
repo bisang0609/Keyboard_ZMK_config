@@ -9,3 +9,9 @@ config SHIELD_TOMAK79_DONGLE
 
 config SHIELD_TOMAK79_DONGLE_SSD1306_BLOCK
     def_bool $(shields_list_contains,tomak79_dongle_ssd1306_block)
+
+config SHIELD_TOMAK79_DONGLE_ST7789_TEST
+    def_bool $(shields_list_contains,tomak79_dongle_st7789_test)
+
+config SHIELD_TOMAK79_DONGLE_YADS
+    def_bool $(shields_list_contains,tomak79_dongle_yads)

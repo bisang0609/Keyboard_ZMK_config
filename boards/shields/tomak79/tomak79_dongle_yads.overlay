@@ -1,0 +1,22 @@
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include "tomak79_layout_only.dtsi"
+
+/ {
+    chosen {
+        zmk,physical-layout = &physical_layout0;
+        zmk,kscan = &dongle_kscan;
+    };
+
+    dongle_kscan: dongle_kscan {
+        compatible = "zmk,kscan-mock";
+        status = "okay";
+        columns = <0>;
+        rows = <0>;
+        events = <0>;
+    };
+};
+
+&pro_micro_serial {
+    status = "disabled";
+};

@@ -1,8 +1,10 @@
+#include <dt-bindings/i2c/i2c.h>
 #include "tomak79.dtsi"
 #include "tomak79_left.dtsi"
 
 / {
     chosen {
+        zmk,battery = &left_fuel_gauge;
         zmk,underglow = &led_strip;
         zmk,physical-layout = &physical_layout0;
     };
@@ -10,4 +12,42 @@
 
 &physical_layout0 {
     kscan = <&kscan0>;
+};
+
+&pinctrl {
+    i2c0_p006_p008_default: i2c0_p006_p008_default {
+        group1 {
+            psels = <NRF_PSEL(TWIM_SDA, 0, 6)>,
+                <NRF_PSEL(TWIM_SCL, 0, 8)>;
+            bias-pull-up;
+        };
+    };
+
+    i2c0_p006_p008_sleep: i2c0_p006_p008_sleep {
+        group1 {
+            psels = <NRF_PSEL(TWIM_SDA, 0, 6)>,
+                <NRF_PSEL(TWIM_SCL, 0, 8)>;
+            low-power-enable;
+            bias-pull-up;
+        };
+    };
+};
+
+&vbatt {
+    status = "disabled";
+};
+
+&pro_micro_i2c {
+    compatible = "nordic,nrf-twim";
+    status = "okay";
+    pinctrl-0 = <&i2c0_p006_p008_default>;
+    pinctrl-1 = <&i2c0_p006_p008_sleep>;
+    pinctrl-names = "default", "sleep";
+    clock-frequency = <I2C_BITRATE_STANDARD>;
+
+    left_fuel_gauge: max17048@36 {
+        compatible = "zmk,maxim-max17048";
+        status = "okay";
+        reg = <0x36>;
+    };
 };

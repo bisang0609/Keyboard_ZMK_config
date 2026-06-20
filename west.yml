@@ -4,6 +4,8 @@ manifest:
       url-base: https://github.com/zmkfirmware
     - name: englmaxi
       url-base: https://github.com/englmaxi
+    - name: janpfischer
+      url-base: https://github.com/janpfischer
 
   projects:
     - name: zmk
@@ -13,6 +15,9 @@ manifest:
     - name: zmk-dongle-display
       remote: englmaxi
       revision: v0.3
+    - name: zmk-dongle-screen
+      remote: janpfischer
+      revision: main
 
   self:
     path: Keyboard_ZMK_config

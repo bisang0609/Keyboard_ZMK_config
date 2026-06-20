@@ -2,3 +2,13 @@ if(CONFIG_SHIELD_TOMAK79_DONGLE_SSD1306_BLOCK)
   zephyr_library_include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../../../zmk/app/include)
   zephyr_library_sources(tomak79_dongle_ssd1306_block.c)
 endif()
+
+if(CONFIG_SHIELD_TOMAK79_DONGLE_ST7789_TEST)
+  zephyr_library_sources(tomak79_dongle_st7789_test.c)
+endif()
+
+if(CONFIG_SHIELD_TOMAK79_LEFT OR CONFIG_SHIELD_TOMAK79_RIGHT)
+  zephyr_library_include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../../../zmk/app/include)
+  zephyr_library_sources(tomak79_ext_power_force.c)
+  zephyr_library_sources(tomak79_battery_refresh.c)
+endif()

@@ -124,9 +124,9 @@ ZMK 본체, Zephyr, modules를 수정해서 문제를 해결하지 않는다.
 
 ## 6. 반드시 유지해야 할 핀 설정
 
-### 6.1 Dongle I2C 핀 고정
+### 6.1 Keyboard-side Fuel Gauge I2C 핀 고정
 
-동글 OLED용 I2C 핀은 반드시 유지한다.
+`left`, `right`, 그리고 향후 추가할 `keypad`의 `MAX17048` I2C 핀은 반드시 유지한다.
 
 - SDA = P0.06
 - SCL = P0.08
@@ -141,3 +141,10 @@ ZMK 본체, Zephyr, modules를 수정해서 문제를 해결하지 않는다.
 ```dts
 NRF_PSEL(TWIM_SDA, 0, 6)
 NRF_PSEL(TWIM_SCL, 0, 8)
+```
+
+### 6.2 Dongle Display I2C 핀 주의
+
+- `tomak79_dongle_ssd1306_block`는 별도 실기 검증 핀을 사용한다.
+- `tomak79_dongle_yads`는 ST7789 기반이며 위 `P0.06/P0.08` keyboard-side fuel gauge 핀 규칙과 별개로 취급한다.
+- 따라서 keyboard-side `MAX17048` 핀과 dongle display 핀을 혼동해서 합치지 않는다.
