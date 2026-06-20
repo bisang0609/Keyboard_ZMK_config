@@ -1,6 +1,6 @@
 file_format: "1"
-id: tomak79_dongle_sh1106_min
-name: Tomak79 Dongle SH1106 Min
+id: tomak79_dongle_ssd1306_block
+name: Tomak79 Dongle SSD1306 Block
 type: shield
 url: https://github.com/bisang0609/Keyboard_ZMK_config
 requires:
