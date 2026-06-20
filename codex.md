@@ -48,8 +48,9 @@
 ## 마지막 빌드 결과
 
 - `tomak79_left`: 빌드 성공
-- `tomak79_right`: 직전 정상 구성 유지
+- `tomak79_right`: 빌드 성공
 - `tomak79_dongle_ssd1306_block`: 빌드 성공, 실기 표시 정상
+- `tomak79_dongle_st7789_test`: 빌드 성공
 - `tomak79_dongle_yads + dongle_screen`: 빌드 성공
 
 ## 다음 작업 후보
