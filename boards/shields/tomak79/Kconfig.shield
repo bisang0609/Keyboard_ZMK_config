@@ -15,3 +15,6 @@ config SHIELD_TOMAK79_DONGLE_ST7789_TEST
 
 config SHIELD_TOMAK79_DONGLE_YADS
     def_bool $(shields_list_contains,tomak79_dongle_yads)
+
+config SHIELD_TOMAK79_DONGLE_YADS_ENCODER
+    def_bool $(shields_list_contains,tomak79_dongle_yads_encoder)
