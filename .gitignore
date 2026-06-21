@@ -5,6 +5,9 @@ build/
 *.map
 *.bin
 *.log
+artifacts/
+_old_zmk_config/
+.venv/
 
 .DS_Store
 .vscode/ipch/

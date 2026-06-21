@@ -19,11 +19,6 @@ include:
     cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"Tomak79BLK\"
 
   - board: nice_nano_v2
-    shield: tomak79_dongle_st7789_test
-    artifact-name: tomak79_dongle_st7789_test
-    cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"Tomak79TFT\"
-
-  - board: nice_nano_v2
     shield: tomak79_dongle_yads dongle_screen
     artifact-name: tomak79_dongle_yads
     cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"Tomak79YADS\"

@@ -19,6 +19,11 @@
   - `SCL = P0.08`
 - `pro_micro_serial` 비활성화 유지
 - Git 관리 대상은 `Keyboard_ZMK_config`만 유지
+- 사용자 실기 검증용 성공 산출물은 임의 삭제하지 않는다.
+  - `build/tomak79_left/`
+  - `build/tomak79_right/`
+  - `build/tomak79_dongle_ssd1306_block/`
+  - `build/tomak79_dongle_yads_encoder/`
 
 ## 현재 유지 실드
 
@@ -26,14 +31,12 @@
 - `tomak79_right`
 - `tomak79_dongle`
 - `tomak79_dongle_ssd1306_block`
-- `tomak79_dongle_st7789_test`
 - `tomak79_dongle_yads`
 - `tomak79_dongle_yads_encoder`
 
 ## 현재 상태
 
 - `tomak79_dongle_ssd1306_block`는 SSD1306 안정화 기준 실드로 유지한다.
-- `tomak79_dongle_st7789_test`는 ST7789 단독 표시 확인용 실드로 유지한다.
 - `tomak79_dongle_yads`는 `zmk-dongle-screen` 기반 ST7789 동글 실드로 유지한다.
 - `tomak79_dongle_yads_encoder`는 ST7789 YADS에 단일 로터리 엔코더를 추가한 동글 실드로 유지한다.
 - `left/right`는 `MAX17048`를 `P0.06/P0.08` I2C로 읽도록 정리했다.
@@ -43,7 +46,7 @@
 ## 최근 완료 작업
 
 - SSD1306 block OLED 레이아웃과 고양이 애니메이션을 마무리했다.
-- ST7789 test/YADS 실드를 현재 저장소 구조에 맞게 추가했다.
+- ST7789 YADS 실드를 현재 저장소 구조에 맞게 추가했다.
 - `tomak79_dongle_yads_encoder` 실드를 추가하고 엔코더 회전은 볼륨 업/다운, 버튼은 화면 깨우기용 레이어 이벤트로 연결했다.
 - `tomak79_dongle_yads_encoder`는 EC11 디텐트당 볼륨이 1단계만 변하도록 `triggers-per-rotation = 20`으로 조정했다.
 - `tomak79_dongle_yads_encoder` 정상 빌드는 엔코더 버튼에 `&studio_unlock`을 매핑하고, debug 빌드는 화면 꺼짐 시간만 5초로 짧게 유지하도록 정리했다.
@@ -51,49 +54,28 @@
 - `tomak79_dongle_yads_encoder`는 실기 감도에 맞춰 `triggers-per-rotation = 40`으로 재조정했다.
 - `tomak79_dongle_yads_encoder`는 배터리 표시를 `left/right/keypad` 3개만 보이도록 정리하고, dongle 배터리 표시는 비활성화했다.
 - `tomak79_dongle_yads_encoder`는 `Mod Widget`을 활성화하고 `WPM Widget`은 비활성화했으며, ambient light 기반 밝기 조정은 사용하지 않도록 유지했다.
+- `tomak79_dongle_yads_encoder`는 엔코더 버튼을 짧게 `studio_unlock`, 길게 현재 BLE 프로파일 `BT_CLR`로 동작하도록 정리했고, 길게 눌림 기준은 `400ms`로 맞췄다.
 - `MAX17048` 실기 로그를 바탕으로 `left/right` 배터리 읽기와 주기 갱신 경로를 정리했다.
 - 임시 USB 로그 빌드 타깃과 중복 로그 코드를 정리했다.
+- 더 이상 쓰지 않는 `tomak79_dongle_st7789_test` 실드와 빌드 타깃을 정리했다.
 
 ## 마지막 빌드 결과
 
 - `tomak79_left`: 빌드 성공
 - `tomak79_right`: 빌드 성공
 - `tomak79_dongle_ssd1306_block`: 빌드 성공, 실기 표시 정상
-- `tomak79_dongle_st7789_test`: 빌드 성공
 - `tomak79_dongle_yads + dongle_screen`: 빌드 성공
-- `tomak79_dongle_yads_encoder + dongle_screen`: 빌드 성공, `studio_unlock` 및 풀 Studio keymap 표시 구조 확인, `Mod Widget on / WPM off / left-right-keypad 3배터리 표시` 반영 확인
+- `tomak79_dongle_yads_encoder + dongle_screen`: 빌드 성공, `studio_unlock`/길게 `BT_CLR(400ms)` 및 풀 Studio keymap 표시 구조 확인, `Mod Widget on / WPM off / left-right-keypad 3배터리 표시` 반영 확인
 - `tomak79_dongle_yads_encoder`: 세로 화면 실험은 되돌리고, 현재는 `dongle_screen` 기반 안정 상태를 우선 유지한다.
+
+## 산출물 보존 규칙
+
+- `build/`는 기본적으로 Git 포함 대상은 아니지만, 사용자 실기 확인용 성공 산출물은 작업 중 임의 삭제하지 않는다.
+- 특히 `left`, `right`, `ssd1306_block`, `yads_encoder`의 성공 빌드 폴더는 사용자 확인 없이 비우지 않는다.
+- 산출물 정리가 필요하면 먼저 어떤 빌드 결과를 남길지 확인한 뒤 일부만 정리한다.
 
 ## 다음 작업 후보
 
 - `right` 실기 배터리 값 확인
-- `tomak79_dongle_st7789_test` 화면 크기/배치 미세 조정
 - `tomak79_dongle_yads` 실기 UI 조정
 - `tomak79_dongle_yads_encoder` 실기에서 디텐트당 볼륨 감도와 Studio keymap 표시 상태 최종 확인
-
-### 2026-06-21 20:19:22 KST 자동 작업 기록
-
-#### 변경 파일
-
--  M boards/shields/tomak79/Kconfig.defconfig
--  M boards/shields/tomak79/Kconfig.shield
--  M build.yaml
--  M codex.md
--  M config/tomak79_dongle.keymap
-- ?? boards/shields/tomak79/tomak79_dongle_yads_encoder.conf
-- ?? boards/shields/tomak79/tomak79_dongle_yads_encoder.overlay
-- ?? boards/shields/tomak79/tomak79_dongle_yads_encoder.zmk.yml
-- ?? config/tomak79_dongle_yads_encoder.keymap
-
-#### Diff stat
-
- boards/shields/tomak79/Kconfig.defconfig |  2 +-
- boards/shields/tomak79/Kconfig.shield    |  3 +++
- build.yaml                               |  6 ++++++
- codex.md                                 | 29 +++++++++++++++++++++++++++++
- config/tomak79_dongle.keymap             | 12 ++++++++++++
- 5 files changed, 51 insertions(+), 1 deletion(-)
-
-#### 다음 작업 메모
-
-- 필요 시 이 항목을 수동으로 보완한다.

@@ -115,10 +115,22 @@ ZMK 본체, Zephyr, modules를 수정해서 문제를 해결하지 않는다.
 - OLED/I2C 테스트용 실험 shield
 - 기존 `agent.md`
 
-현재는 아래 두 파일만 유지한다.
+단, 사용자가 보존을 원하거나 실기 검증에 쓰는 `build/` 내부 성공 산출물은 예외로 본다.
+특히 아래 산출물은 사용자 확인 없이 삭제하지 않는다.
+
+- `build/tomak79_left/`
+- `build/tomak79_right/`
+- `build/tomak79_dongle_ssd1306_block/`
+- `build/tomak79_dongle_yads_encoder/`
+
+`build/` 전체 삭제, 일괄 정리, 산출물 폴더 비우기는 사용자 요청이 있더라도 보존 대상 산출물 범위를 먼저 확인한 뒤 진행한다.
+
+작업 기록용 문서는 기본적으로 아래 두 파일을 기준으로 유지한다.
 
 - `AGENTS.md`: Codex/AI 작업 지침
 - `codex.md`: 실제 작업 이력, 현재 상태, 빌드 결과, 다음 작업
+
+개인 작업 메모용 `codex_prompt.md`가 있더라도 그 파일은 사용자가 별도로 관리할 수 있으므로 임의 삭제하거나 내용 구조를 바꾸지 않는다.
 
 ---
 
