@@ -95,3 +95,19 @@
   - `~/ZMK_Keyboard/firmware_exports`
   - `~/ZMK_Keyboard/snake-module`
 - `~/ZMK_Keyboard/build/`는 전체 삭제하지 말고, 보존 대상 산출물만 남기는 현재 규칙을 그대로 유지한다.
+
+### 2026-06-23 01:07:22 KST 자동 작업 기록
+
+#### 변경 파일
+
+-  M codex.md
+- ?? boards/shields/tomak79/slot_numbers.webp
+
+#### Diff stat
+
+ codex.md | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+#### 다음 작업 메모
+
+- 필요 시 이 항목을 수동으로 보완한다.
