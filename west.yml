@@ -6,9 +6,6 @@ manifest:
       url-base: https://github.com/englmaxi
     - name: janpfischer
       url-base: https://github.com/janpfischer
-    - name: joaopedropio
-      url-base: https://github.com/joaopedropio
-
   projects:
     - name: zmk
       remote: zmkfirmware
@@ -20,9 +17,5 @@ manifest:
     - name: zmk-dongle-screen
       remote: janpfischer
       revision: main
-    - name: snake-module
-      remote: joaopedropio
-      revision: master
-
   self:
     path: Keyboard_ZMK_config

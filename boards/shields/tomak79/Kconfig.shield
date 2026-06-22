@@ -15,6 +15,3 @@ config SHIELD_TOMAK79_DONGLE_YADS
 
 config SHIELD_TOMAK79_DONGLE_YADS_ENCODER
     def_bool $(shields_list_contains,tomak79_dongle_yads_encoder)
-
-config SHIELD_TOMAK79_DONGLE_YADS_ENCODER_SNAKE
-    def_bool $(shields_list_contains,tomak79_dongle_yads_encoder_snake)
