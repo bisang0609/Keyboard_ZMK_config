@@ -33,12 +33,15 @@
 - `tomak79_dongle_ssd1306_block`
 - `tomak79_dongle_yads`
 - `tomak79_dongle_yads_encoder`
+- `tomak79_dongle_yads_encoder_snake`
 
 ## 현재 상태
 
 - `tomak79_dongle_ssd1306_block`는 SSD1306 안정화 기준 실드로 유지한다.
 - `tomak79_dongle_yads`는 `zmk-dongle-screen` 기반 ST7789 동글 실드로 유지한다.
 - `tomak79_dongle_yads_encoder`는 ST7789 YADS에 단일 로터리 엔코더를 추가한 동글 실드로 유지한다.
+- `tomak79_dongle_yads_encoder_snake`는 `joaopedropio/snake-dongle` UI를 `tomak79_dongle_yads_encoder` 하드웨어 베이스에 맞춰 붙인 실험/확장 실드다.
+- `tomak79_dongle_yads_encoder_snake`는 로컬 빌드와 ZMK Studio CDC/USB는 동작하지만, 현재 실기 기준으로 split BLE 연결과 배터리 위젯 표시는 정상 동작하지 않는다.
 - `left/right`는 `MAX17048`를 `P0.06/P0.08` I2C로 읽도록 정리했다.
 - `left/right`는 배터리 갱신 루프를 추가해 split 배터리 값이 idle 이후에도 다시 전달되도록 보강했다.
 - `left/right`는 `RGB underglow`와 `EXT_POWER`를 분리해 `P0.13` 전원 제어 영향을 줄이도록 조정했다.
@@ -55,6 +58,13 @@
 - `tomak79_dongle_yads_encoder`는 배터리 표시를 `left/right/keypad` 3개만 보이도록 정리하고, dongle 배터리 표시는 비활성화했다.
 - `tomak79_dongle_yads_encoder`는 `Mod Widget`을 활성화하고 `WPM Widget`은 비활성화했으며, ambient light 기반 밝기 조정은 사용하지 않도록 유지했다.
 - `tomak79_dongle_yads_encoder`는 엔코더 버튼을 짧게 `studio_unlock`, 길게 현재 BLE 프로파일 `BT_CLR`로 동작하도록 정리했고, 길게 눌림 기준은 `400ms`로 맞췄다.
+- `tomak79_dongle_yads_encoder_snake` 타깃을 추가하고 `snake-module`을 `west.yml`에 연결했다.
+- `tomak79_dongle_yads_encoder_snake`는 YADS ST7789 핀맵을 로컬 overlay로 고정하고, `snake_adapter` 기본 디스플레이/버튼 충돌을 비활성화해 `tomak79` 하드웨어에 맞췄다.
+- `tomak79_dongle_yads_encoder_snake`는 엔코더 회전은 볼륨 업/다운 유지, 엔코더 버튼은 `snake-dongle` action button으로 연결했다.
+- `tomak79_dongle_yads_encoder_snake`는 `k_malloc()` 링크 오류를 피하도록 힙 풀(`CONFIG_HEAP_MEM_POOL_SIZE=16384`)을 활성화했다.
+- `tomak79_dongle_yads_encoder_snake`는 기본 화면을 `status`로 두고, Studio USB UART 스니펫을 포함한 빌드 기준으로 CDC 포트가 나오도록 다시 맞췄다.
+- `tomak79_dongle_yads_encoder_snake`는 엔코더 버튼을 `짧게 studio_unlock / 길게 BT_CLR(400ms)`로 바꿔 split 본드 초기화 테스트를 바로 할 수 있게 정리했다.
+- `tomak79_dongle_yads_encoder_snake`는 `snake-dongle` 원본 배치에 맞춰 `5-slot` 모드로 재정렬하고, 상단 슬롯(`slot 2`)에 배터리 위젯이 뜨도록 `CONFIG_BATTERY_WIDGET_NUMBER=0`을 명시했다.
 - `MAX17048` 실기 로그를 바탕으로 `left/right` 배터리 읽기와 주기 갱신 경로를 정리했다.
 - 임시 USB 로그 빌드 타깃과 중복 로그 코드를 정리했다.
 - 더 이상 쓰지 않는 `tomak79_dongle_st7789_test` 실드와 빌드 타깃을 정리했다.
@@ -66,6 +76,10 @@
 - `tomak79_dongle_ssd1306_block`: 빌드 성공, 실기 표시 정상
 - `tomak79_dongle_yads + dongle_screen`: 빌드 성공
 - `tomak79_dongle_yads_encoder + dongle_screen`: 빌드 성공, `studio_unlock`/길게 `BT_CLR(400ms)` 및 풀 Studio keymap 표시 구조 확인, `Mod Widget on / WPM off / left-right-keypad 3배터리 표시` 반영 확인
+- `tomak79_dongle_yads_encoder_snake + snake_adapter`: 빌드 성공, `snake-dongle` UI/애니메이션 및 엔코더 버튼 action 연결 확인
+- `tomak79_dongle_yads_encoder_snake + snake_adapter + studio-rpc-usb-uart`: 빌드 성공, `Copy_Tomak` 이름/CDC ACM/Studio UART transport 포함 상태 확인
+- `tomak79_dongle_yads_encoder_snake + snake_adapter + studio-rpc-usb-uart`: 빌드 성공, `5-slot` 상단 배터리 위젯 배치(`slot 2 = battery`, `BATTERY_WIDGET_NUMBER=0`) 반영 확인
+- `tomak79_dongle_yads_encoder_snake`: 실기 실패, CDC/ZMK Studio는 정상이나 좌우 BLE 연결과 배터리 정보 표시는 해결하지 못함
 - `tomak79_dongle_yads_encoder`: 세로 화면 실험은 되돌리고, 현재는 `dongle_screen` 기반 안정 상태를 우선 유지한다.
 
 ## 산출물 보존 규칙
@@ -79,3 +93,5 @@
 - `right` 실기 배터리 값 확인
 - `tomak79_dongle_yads` 실기 UI 조정
 - `tomak79_dongle_yads_encoder` 실기에서 디텐트당 볼륨 감도와 Studio keymap 표시 상태 최종 확인
+- `tomak79_dongle_yads_encoder_snake` 실기에서 화면 회전(`CONFIG_ROTATE_DISPLAY`)과 action button 체감 확인
+- `tomak79_dongle_yads_encoder_snake`의 split BLE 미연결 원인과 배터리 이벤트/위젯 표시 경로 재검토
