@@ -1,0 +1,13 @@
+file_format: "1"
+id: tomak79_dongle_ssh1106_encoder
+name: Tomak79 Dongle SSH1106 Encoder
+type: shield
+url: https://github.com/bisang0609/Keyboard_ZMK_config
+requires:
+  - pro_micro
+features:
+  - display
+  - keys
+  - encoder
+  - usb
+  - studio

@@ -10,6 +10,12 @@ config SHIELD_TOMAK79_DONGLE
 config SHIELD_TOMAK79_DONGLE_SSD1306_BLOCK
     def_bool $(shields_list_contains,tomak79_dongle_ssd1306_block)
 
+config SHIELD_TOMAK79_DONGLE_SSH1106
+    def_bool $(shields_list_contains,tomak79_dongle_ssh1106)
+
+config SHIELD_TOMAK79_DONGLE_SSH1106_ENCODER
+    def_bool $(shields_list_contains,tomak79_dongle_ssh1106_encoder)
+
 config SHIELD_TOMAK79_DONGLE_YADS
     def_bool $(shields_list_contains,tomak79_dongle_yads)
 

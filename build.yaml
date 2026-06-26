@@ -23,6 +23,18 @@ include:
     cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"Tomak79BLK\"
 
   - board: nice_nano_v2
+    shield: tomak79_dongle_ssh1106
+    artifact-name: tomak79_dongle_ssh1106
+    snippet: studio-rpc-usb-uart
+    cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"Tomak79SSH\"
+
+  - board: nice_nano_v2
+    shield: tomak79_dongle_ssh1106_encoder
+    artifact-name: tomak79_dongle_ssh1106_encoder
+    snippet: studio-rpc-usb-uart
+    cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"Tomak79SHE\" -DKEYMAP_FILE=/home/bisang0609/ZMK_Keyboard/Keyboard_ZMK_config/config/tomak79_dongle_ssh1106_encoder.keymap
+
+  - board: nice_nano_v2
     shield: tomak79_dongle_yads dongle_screen
     artifact-name: tomak79_dongle_yads
     cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"Tomak79YADS\"
