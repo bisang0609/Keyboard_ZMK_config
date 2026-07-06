@@ -51,6 +51,7 @@
 - `tomak79_dongle_ssh1106` 실드를 추가해 `ssd1306_block`와 분리된 1.3인치 SH1106 OLED 구성을 유지하도록 정리했다.
 - `tomak79_dongle_ssh1106_encoder` 실드를 추가해 `P0.29/P0.31` 회전과 `P0.02` 버튼을 사용하는 엔코더 구성을 SH1106 쪽에도 분리 유지하도록 정리했다.
 - fresh build에서 빠지던 `CONFIG_APPLICATION_DEFINED_SYSCALL`를 공통 설정으로 보강해 app-defined syscall 헤더 생성 경로를 복구하도록 정리했다.
+- `tomak79_dongle_ssh1106_encoder`는 split peripheral battery fetch를 켜서 동글 화면에서 `LT/RT` 배터리 표시로 연결 상태를 바로 확인할 수 있게 정리했다.
 
 ## 최근 완료 작업
 
@@ -59,6 +60,7 @@
 - `tomak79_dongle_ssh1106_encoder`는 `triggers-per-rotation = 40`으로 유지한다.
 - `tomak79_dongle_yads_encoder`의 엔코더 핀 기준을 SH1106 쪽에도 동일하게 적용했다.
 - `MAX17048` 실기 로그를 바탕으로 `left/right` 배터리 읽기와 주기 갱신 경로를 정리했다.
+- `tomak79_dongle_ssh1106_encoder`에 `CONFIG_ZMK_SPLIT_BLE_CENTRAL_BATTERY_LEVEL_FETCHING=y`를 추가해 `LT/RT` 패널에 split 배터리 표시가 나오도록 보강했다.
 
 ## 마지막 빌드 결과
 
@@ -67,6 +69,7 @@
 - `tomak79_dongle_ssd1306_block`: 빌드 성공, 실기 표시 정상
 - `tomak79_dongle_ssh1106`: 빌드 성공, 산출물 `build/tomak79_dongle_ssh1106/`
 - `tomak79_dongle_ssh1106_encoder`: 빌드 성공, 산출물 `build/tomak79_dongle_ssh1106_encoder/`
+- `tomak79_dongle_ssh1106_encoder + split battery fetch`: 빌드 성공, 산출물 `build/tomak79_dongle_ssh1106_encoder_battfetch_20260706/`, `LT/RT` 배터리 표시로 split 연결 상태 확인 가능
 - `tomak79_dongle_yads + dongle_screen`: 빌드 성공
 - `tomak79_dongle_yads_encoder + dongle_screen`: 빌드 성공, `studio_unlock`/길게 `BT_CLR(400ms)` 및 풀 Studio keymap 표시 구조 확인, `Mod Widget on / WPM off / left-right-keypad 3배터리 표시` 반영 확인
 - `tomak79_dongle_yads_encoder`: 세로 화면 실험은 되돌리고, 현재는 `dongle_screen` 기반 안정 상태를 우선 유지한다.
@@ -75,4 +78,5 @@
 
 - `build/`는 기본적으로 Git 포함 대상은 아니지만, 사용자 실기 확인용 성공 산출물은 작업 중 임의 삭제하지 않는다.
 - 특히 `left`, `right`, `ssd1306_block`, `ssh1106`, `ssh1106_encoder`, `yads_encoder`의 성공 빌드 폴더는 사용자 확인 없이 비우지 않는다.
+- `tomak79_dongle_ssh1106_encoder_battfetch_20260706`는 이번 연결 확인용 최종 산출물로 보존한다.
 - 산출물 정리가 필요하면 먼저 어떤 빌드 결과를 남길지 확인한 뒤 일부만 정리한다.
