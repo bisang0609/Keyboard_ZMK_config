@@ -42,6 +42,7 @@
 - `tomak79_dongle_ssd1306_block`는 SSD1306 안정화 기준 실드로 유지한다.
 - `tomak79_dongle_ssh1106`는 1.3인치 SH1106 OLED용 분리 실드로 유지한다.
 - `tomak79_dongle_ssh1106_encoder`는 SH1106 OLED에 YADS와 동일한 엔코더 핀 구성을 붙인 분리 실드로 유지한다.
+- `tomak79_dongle_ssh1106_encoder`는 엔코더 반틱에서 볼륨이 먼저 두 번 움직이던 체감을 줄이기 위해 `triggers-per-rotation = 20`으로 조정한 상태다.
 - `tomak79_dongle_yads`는 `zmk-dongle-screen` 기반 ST7789 동글 실드로 유지한다.
 - `tomak79_dongle_yads_encoder`는 ST7789 YADS에 단일 로터리 엔코더를 추가한 동글 실드로 유지한다.
 - `left/right`는 `MAX17048`를 `P0.06/P0.08` I2C로 읽도록 정리했다.
@@ -63,7 +64,7 @@
 
 - `tomak79_dongle_ssh1106`를 `sinowealth,sh1106` 기반 128x64 OLED 실드로 추가했다.
 - `tomak79_dongle_ssh1106_encoder`를 추가하고 엔코더 회전은 볼륨 업/다운, 버튼은 짧게 `studio_unlock`, 길게 `BT_CLR`로 맞췄다.
-- `tomak79_dongle_ssh1106_encoder`는 `triggers-per-rotation = 40`으로 유지한다.
+- `tomak79_dongle_ssh1106_encoder`는 `triggers-per-rotation = 20`으로 조정해 반틱 반응을 줄이고 1틱 기준 볼륨 변화 체감으로 맞췄다.
 - `tomak79_dongle_yads_encoder`의 엔코더 핀 기준을 SH1106 쪽에도 동일하게 적용했다.
 - `MAX17048` 실기 로그를 바탕으로 `left/right` 배터리 읽기와 주기 갱신 경로를 정리했다.
 - `tomak79_dongle_ssh1106_encoder`에 `CONFIG_ZMK_SPLIT_BLE_CENTRAL_BATTERY_LEVEL_FETCHING=y`를 추가해 `LT/RT` 패널에 split 배터리 표시가 나오도록 보강했다.
