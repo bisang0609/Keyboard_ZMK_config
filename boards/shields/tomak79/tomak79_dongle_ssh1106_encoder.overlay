@@ -27,7 +27,7 @@
         encoder_button {
             kscan = <&encoder_button_kscan>;
             row-offset = <5>;
-            col-offset = <1>;
+            col-offset = <4>;
         };
     };
 

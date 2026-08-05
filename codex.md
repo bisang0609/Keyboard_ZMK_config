@@ -101,3 +101,24 @@
 - 현재 상위 `~/ZMK_Keyboard/build/`에는 `tomak79_dongle_ssh1106_encoder`, `tomak79_dongle_yads_encoder`, `tomak79_left`, `tomak79_right`만 남기고 나머지 구버전/실험 산출물은 정리했다.
 - 상위 `~/ZMK_Keyboard/snake-module`는 이번 정리에서 삭제했다.
 - 산출물 정리가 필요하면 먼저 어떤 빌드 결과를 남길지 확인한 뒤 일부만 정리한다.
+
+### 2026-08-05 18:09:32 KST 자동 작업 기록
+
+#### 변경 파일
+
+-  M boards/shields/tomak79/tomak79_dongle_ssh1106_encoder.overlay
+-  M boards/shields/tomak79/tomak79_right.dtsi
+-  M codex.md
+-  M config/tomak79_dongle_ssh1106_encoder.keymap
+
+#### Diff stat
+
+ .../tomak79/tomak79_dongle_ssh1106_encoder.overlay |  2 +-
+ boards/shields/tomak79/tomak79_right.dtsi          | 24 +++++++++++-----------
+ codex.md                                           | 12 +++++++++++
+ config/tomak79_dongle_ssh1106_encoder.keymap       |  8 +-------
+ 4 files changed, 26 insertions(+), 20 deletions(-)
+
+#### 다음 작업 메모
+
+- 필요 시 이 항목을 수동으로 보완한다.
