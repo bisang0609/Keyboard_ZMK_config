@@ -30,6 +30,3 @@ if(CONFIG_SHIELD_TOMAK79_RIGHT2)
   target_sources(app PRIVATE tomak79_right2_oled_status.c)
   target_sources(app PRIVATE tomak79_right2_oled_reinit.c)
 endif()
-
-if(CONFIG_SHIELD_TOMAK79_RIGHT3)
-endif()
