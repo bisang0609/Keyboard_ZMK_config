@@ -72,6 +72,8 @@
 - `tomak79_dongle_ssh1106_encoder` keymap에 `FN + ESC/F1..F6` underglow 제어를 추가했다.
 - `tomak79_dongle_ssh1106_encoder` keymap에서 `Fn`이 보이지 않던 원인은 물리 `Fn` 슬롯에 `&enc_btn_btclr 0 0`가 들어가 있었기 때문이며, 이를 `&mo 4`로 되돌려 `Ctrl-Alt` 사이 키가 `Fn`으로 동작하도록 수정했다.
 - `tomak79_dongle_ssh1106_encoder`의 USB serial 복구를 위해 `pro_micro_serial` 비활성화를 제거하고, 최종 빌드에는 `studio-rpc-usb-uart`를 명시적으로 포함해 `uart_rpc_transport`와 `cdc_acm`이 살아 있는 상태로 맞췄다.
+- `settings_reset_nice_nano_v2`를 다시 빌드해 reset UF2 경로를 `~/ZMK_Keyboard/build/settings_reset_nice_nano_v2/zephyr/zmk.uf2`로 확인했다.
+- `left` 없이 `right`만 연결된 상태에서는 동글의 첫 peripheral 슬롯 표시가 `LT`처럼 보일 수 있음을 확인했다.
 
 ## 마지막 빌드 결과
 
@@ -84,6 +86,7 @@
 - `tomak79_dongle_yads + dongle_screen`: 빌드 성공
 - `tomak79_dongle_yads_encoder + dongle_screen`: 빌드 성공, `studio_unlock`/길게 `BT_CLR(400ms)` 및 풀 Studio keymap 표시 구조 확인, `Mod Widget on / WPM off / left-right-keypad 3배터리 표시` 반영 확인
 - `tomak79_dongle_yads_encoder`: 세로 화면 실험은 되돌리고, 현재는 `dongle_screen` 기반 안정 상태를 우선 유지한다.
+- `settings_reset_nice_nano_v2`: 빌드 성공, 산출물 `build/settings_reset_nice_nano_v2/`
 
 ## 빌드 위치
 
@@ -91,6 +94,7 @@
 - 현재 저장소 내부에서 `west build -d build/...`를 실행하면 테스트 산출물은 `~/ZMK_Keyboard/Keyboard_ZMK_config/build/<name>/zephyr/` 아래에 생성된다.
 - 사용자가 바로 플래시할 최종 산출물은 가능하면 `~/ZMK_Keyboard/build/<artifact-name>/zephyr/` 기준으로 다시 빌드해 제공하는 쪽을 우선한다.
 - 이번 최종 반영 기준 `tomak79_dongle_ssh1106_encoder` UF2 위치는 `~/ZMK_Keyboard/build/tomak79_dongle_ssh1106_encoder/zephyr/zmk.uf2` 이다.
+- 이번 reset 확인용 `settings_reset_nice_nano_v2` UF2 위치는 `~/ZMK_Keyboard/build/settings_reset_nice_nano_v2/zephyr/zmk.uf2` 이다.
 
 ## 산출물 보존 규칙
 
