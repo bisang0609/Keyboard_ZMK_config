@@ -4,6 +4,12 @@ config SHIELD_TOMAK79_LEFT
 config SHIELD_TOMAK79_RIGHT
     def_bool $(shields_list_contains,tomak79_right)
 
+config SHIELD_TOMAK79_RIGHT2
+    def_bool $(shields_list_contains,tomak79_right2)
+
+config SHIELD_TOMAK79_RIGHT3
+    def_bool $(shields_list_contains,tomak79_right3)
+
 config SHIELD_TOMAK79_DONGLE
     def_bool $(shields_list_contains,tomak79_dongle)
 

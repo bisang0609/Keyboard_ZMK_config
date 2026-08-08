@@ -12,6 +12,7 @@
 #include <zmk/endpoints_types.h>
 #include <zmk/hid_indicators.h>
 #include <zmk/keymap.h>
+#include <zmk/rgb_underglow.h>
 #include <zmk/split/central.h>
 
 #include <stdbool.h>
@@ -376,6 +377,8 @@ static const struct glyph_entry glyphs[] = {
     {'B', {0x1e, 0x11, 0x11, 0x1e, 0x11, 0x11, 0x1e}},
     {'C', {0x0e, 0x11, 0x10, 0x10, 0x10, 0x11, 0x0e}},
     {'E', {0x1f, 0x10, 0x10, 0x1e, 0x10, 0x10, 0x1f}},
+    {'F', {0x1f, 0x10, 0x10, 0x1e, 0x10, 0x10, 0x10}},
+    {'G', {0x0e, 0x11, 0x10, 0x17, 0x11, 0x11, 0x0f}},
     {'I', {0x0e, 0x04, 0x04, 0x04, 0x04, 0x04, 0x0e}},
     {'K', {0x11, 0x12, 0x14, 0x18, 0x14, 0x12, 0x11}},
     {'L', {0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x1f}},
@@ -510,6 +513,7 @@ static void build_dashboard(uint8_t screen[GRID_ROWS][GRID_COLS][BLOCK_SIZE]) {
     uint8_t right_level = 0;
     bool left_ok = false;
     bool right_ok = false;
+    bool underglow_on = false;
     char layer_text[6];
     char out_text[5];
 
@@ -524,6 +528,10 @@ static void build_dashboard(uint8_t screen[GRID_ROWS][GRID_COLS][BLOCK_SIZE]) {
     draw_battery_panel(screen, 0, "LT", left_level, left_ok);
     draw_battery_panel(screen, 5, "RT", right_level, right_ok);
     draw_battery_panel(screen, 10, "KP", central_battery, true);
+
+    if (zmk_rgb_underglow_get_state(&underglow_on) == 0) {
+        draw_text(screen, 0, 3, underglow_on ? "UG ON" : "UG OFF");
+    }
 
     if (endpoint.transport == ZMK_TRANSPORT_USB) {
         snprintf(out_text, sizeof(out_text), "USB");
