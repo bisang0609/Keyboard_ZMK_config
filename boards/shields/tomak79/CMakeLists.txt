@@ -20,8 +20,13 @@ if(CONFIG_SHIELD_TOMAK79_LEFT OR CONFIG_SHIELD_TOMAK79_RIGHT OR CONFIG_SHIELD_TO
   zephyr_library_sources(tomak79_battery_refresh.c)
 endif()
 
-if(CONFIG_SHIELD_TOMAK79_RIGHT)
+if(CONFIG_SHIELD_TOMAK79_RIGHT OR CONFIG_SHIELD_TOMAK79_RIGHT3)
   zephyr_library_sources(tomak79_right_underglow_resume.c)
+endif()
+
+if(CONFIG_SHIELD_TOMAK79_RIGHT3)
+  zephyr_library_sources(tomak79_right3_hid_indicators.c)
+  zephyr_library_sources(tomak79_right3_caps_num_led.c)
 endif()
 
 if(CONFIG_SHIELD_TOMAK79_RIGHT2)

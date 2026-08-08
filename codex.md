@@ -54,6 +54,10 @@
 - `tomak79_right2`는 `right`를 복제한 실험용 split peripheral 실드로 추가했고, 이후 부가기능 실험은 `right2` 기준으로 진행한다.
 - `tomak79_right3`는 현재 안정 상태의 `right`를 그대로 복제한 새 실험용 split peripheral 실드로 추가했고, 다음 기능 실험은 `right3` 기준으로 진행한다.
 - `tomak79_right3`의 `P0.09` 추가 WS2812 실험은 underglow 복귀 이상 원인 분리를 위해 현재 잠시 제외했고, 다시 `right`와 동일한 동작 기준으로 되돌린 상태다.
+- `tomak79_right3`는 현재 `right`와 동일하게 underglow 복귀 강제 재시동 로직을 함께 포함하도록 맞췄다.
+- `tomak79_right3`에는 `P0.09` 별도 `WS2812 3개` 체인을 다시 추가했고, `Caps/Num` indicator 이벤트로 점등하도록 분리했다.
+- `tomak79_right3`의 `P0.09` 3LED는 `spi2/ws2812-spi`와 수동 bitbang 경로가 실기에서 안정적이지 않아, 현재는 `nRF52 PWM + EasyDMA` 방식으로 underglow와 완전히 분리해 재구성했다.
+- `tomak79_right3`의 `P0.09` 3LED는 현재 실기에서 `LED1=Caps`, `LED2=Caps/Num 요약`, `LED3=Num` 표시로 정상 동작한다.
 - `tomak79_right` underglow 복귀 이상은 동글 표시 문제가 아니라 `right` 쪽 WS2812 재점등 경로 문제로 확인했다.
 - `tomak79_right`에는 키 입력 후 underglow 상태가 `ON`으로 복귀해도 실제 LED 출력이 다시 살아나지 않는 경우를 대비해, `off -> 20ms 지연 -> on` 강제 재시동 로직을 추가했다.
 - `tomak79_dongle_ssh1106_encoder` 화면에는 `USB/BLx` 위 빈 줄에 `UG ON/OFF` 상태를 표시하도록 보강했다.
@@ -116,6 +120,9 @@
 - `tomak79_right2 + custom OLED status (LT/RT/CAP/NUM)`: 빌드 성공, 산출물 `~/ZMK_Keyboard/build/tomak79_right2/zephyr/zmk.uf2`
 - `tomak79_right3`: 빌드 성공, 산출물 `~/ZMK_Keyboard/build/tomak79_right3/zephyr/zmk.uf2`
 - `tomak79_right3 (right 기준 복구판)`: 빌드 성공, 산출물 `~/ZMK_Keyboard/build/tomak79_right3/zephyr/zmk.uf2`
+- `tomak79_right3 (right 기준 + underglow resume 공유판)`: 빌드 성공, 산출물 `~/ZMK_Keyboard/build/tomak79_right3/zephyr/zmk.uf2`
+- `tomak79_right3 + P0.09 WS2812 x3 Caps/Num`: 빌드 성공, 산출물 `~/ZMK_Keyboard/build/tomak79_right3/zephyr/zmk.uf2`
+- `tomak79_right3 + P0.09 PWM EasyDMA Caps/Num`: 빌드 성공, 산출물 `~/ZMK_Keyboard/build/tomak79_right3/zephyr/zmk.uf2`
 - `tomak79_right2 + oled_adapter_pro_micro_128x32`: 빌드 성공, 산출물 `~/ZMK_Keyboard/build/tomak79_right2_oled_adapter/zephyr/zmk.uf2`
 - `tomak79_dongle_ssd1306_block`: 빌드 성공, 실기 표시 정상
 - `tomak79_dongle_ssh1106`: 빌드 성공, 산출물 `build/tomak79_dongle_ssh1106/`
