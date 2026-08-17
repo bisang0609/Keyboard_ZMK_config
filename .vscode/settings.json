@@ -1,5 +1,6 @@
 {
   "git.autoRepositoryDetection": false,
+  "git.openRepositoryInParentFolders": "never",
   "git.scanRepositories": [
     "Keyboard_ZMK_config"
   ],
