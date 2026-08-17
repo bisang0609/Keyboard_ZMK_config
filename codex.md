@@ -89,3 +89,4 @@
 
 - 저장소 내부 테스트 빌드는 `build/test/`만 사용한다.
 - 최종 배포용 산출물은 필요 시 상위 `~/ZMK_Keyboard/build/`에서도 다시 빌드해 맞춘다.
+- underglow는 `left/right` 개별 상태 유지 방식에서 `dongle central` 기준의 중앙 통합형으로 전환하는 방향을 다음 작업 기준으로 둔다.
