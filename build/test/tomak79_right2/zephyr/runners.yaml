@@ -1,0 +1,30 @@
+# Available runners configured by board.cmake.
+runners:
+- uf2
+- nrfjprog
+
+# Default flash runner if --runner is not given.
+flash-runner: uf2
+
+# Common runner configuration values.
+config:
+  board_dir: /home/bisang0609/ZMK_Keyboard/zmk/app/boards/arm/nice_nano
+  # Build outputs:
+  elf_file: zmk.elf
+  hex_file: zmk.hex
+  bin_file: zmk.bin
+  uf2_file: zmk.uf2
+  # Host tools:
+  gdb: /home/bisang0609/zephyr-sdk-0.17.0/arm-zephyr-eabi/bin/arm-zephyr-eabi-gdb-py
+  openocd: /home/bisang0609/zephyr-sdk-0.17.0/sysroots/x86_64-pokysdk-linux/usr/bin/openocd
+  openocd_search:
+    - /home/bisang0609/zephyr-sdk-0.17.0/sysroots/x86_64-pokysdk-linux/usr/share/openocd/scripts
+
+# Runner specific arguments
+args:
+  uf2:
+    []
+
+  nrfjprog:
+    - --nrf-family=NRF52
+    - --softreset
