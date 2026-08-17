@@ -4,6 +4,7 @@
 
 - 이 저장소는 ZMK `v0.3` 기반 `tomak79` keyboard/dongle config만 관리한다.
 - 목표는 빌드 가능 상태와 재현 가능한 환경을 우선 유지하는 것이다.
+- 집/회사 PC 동기화 이슈를 줄이기 위해, 현재는 주요 성공 빌드 산출물도 저장소 내부 `build/`에 함께 보관한다.
 
 ## 수정 금지
 
@@ -137,6 +138,7 @@
 ## 빌드 위치
 
 - 사용자가 평소 쓰는 기본 빌드 루트는 `~/ZMK_Keyboard/build/` 이다.
+- 집/회사 공통 동기화용 복사본은 저장소 내부 `~/ZMK_Keyboard/Keyboard_ZMK_config/build/` 에도 함께 유지한다.
 - 현재 저장소 내부에서 `west build -d build/...`를 실행하면 테스트 산출물은 `~/ZMK_Keyboard/Keyboard_ZMK_config/build/<name>/zephyr/` 아래에 생성된다.
 - 사용자가 바로 플래시할 최종 산출물은 가능하면 `~/ZMK_Keyboard/build/<artifact-name>/zephyr/` 기준으로 다시 빌드해 제공하는 쪽을 우선한다.
 - 이번 최종 반영 기준 `tomak79_dongle_ssh1106_encoder` UF2 위치는 `~/ZMK_Keyboard/build/tomak79_dongle_ssh1106_encoder/zephyr/zmk.uf2` 이다.
@@ -147,6 +149,7 @@
 ## 산출물 보존 규칙
 
 - `build/`는 기본적으로 Git 포함 대상은 아니지만, 사용자 실기 확인용 성공 산출물은 작업 중 임의 삭제하지 않는다.
+- 현재는 사용자 요청으로 집/회사 동기화를 위해 저장소 내부 `build/`도 Git에 포함해 함께 보관한다.
 - 특히 `left`, `right`, `ssd1306_block`, `ssh1106`, `ssh1106_encoder`, `yads_encoder`의 성공 빌드 폴더는 사용자 확인 없이 비우지 않는다.
 - `tomak79_dongle_ssh1106_encoder_battfetch_20260706`는 이번 연결 확인용 최종 산출물로 보존한다.
 - 저장소 내부 테스트 빌드(`Keyboard_ZMK_config/build/...`)는 작업 흔적으로만 보고, 최종 반영 후에는 정리해 두는 쪽을 우선한다.

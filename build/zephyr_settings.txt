@@ -1,0 +1,15 @@
+# WARNING. THIS FILE IS AUTO-GENERATED. DO NOT MODIFY!
+#
+# This file contains build system settings derived from your modules.
+#
+# Modules may be set via ZEPHYR_MODULES, ZEPHYR_EXTRA_MODULES,
+# and/or the west manifest file.
+#
+# See the Modules guide for more information.
+"BOARD_ROOT":"/home/bisang0609/ZMK_Keyboard/Keyboard_ZMK_config"
+"BOARD_ROOT":"/home/bisang0609/ZMK_Keyboard/zmk-dongle-display"
+"DTS_ROOT":"/home/bisang0609/ZMK_Keyboard/modules/hal/atmel"
+"DTS_ROOT":"/home/bisang0609/ZMK_Keyboard/modules/hal/espressif"
+"DTS_ROOT":"/home/bisang0609/ZMK_Keyboard/modules/hal/gigadevice"
+"DTS_ROOT":"/home/bisang0609/ZMK_Keyboard/modules/hal/nuvoton"
+"DTS_ROOT":"/home/bisang0609/ZMK_Keyboard/modules/hal/stm32"

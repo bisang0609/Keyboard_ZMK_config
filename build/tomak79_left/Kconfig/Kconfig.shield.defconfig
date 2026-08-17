@@ -1,0 +1,5 @@
+osource "/home/bisang0609/ZMK_Keyboard/Keyboard_ZMK_config/boards/shields/*/Kconfig.defconfig"
+osource "/home/bisang0609/ZMK_Keyboard/zmk-dongle-display/boards/shields/*/Kconfig.defconfig"
+osource "/home/bisang0609/ZMK_Keyboard/zmk-dongle-screen/boards/shields/*/Kconfig.defconfig"
+osource "/home/bisang0609/ZMK_Keyboard/zmk/app/boards/shields/*/Kconfig.defconfig"
+osource "/home/bisang0609/ZMK_Keyboard/Keyboard_ZMK_config/boards/shields/*/Kconfig.defconfig"

@@ -1,10 +1,3 @@
-build/
-*.uf2
-*.hex
-*.elf
-*.map
-*.bin
-*.log
 artifacts/
 _old_zmk_config/
 .venv/
