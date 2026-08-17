@@ -24,8 +24,7 @@ if(CONFIG_SHIELD_TOMAK79_RIGHT OR CONFIG_SHIELD_TOMAK79_RIGHT3)
   zephyr_library_sources(tomak79_right_underglow_resume.c)
 endif()
 
-if(CONFIG_SHIELD_TOMAK79_RIGHT3)
-  zephyr_library_sources(tomak79_right3_hid_indicators.c)
+if(CONFIG_SHIELD_TOMAK79_RIGHT OR CONFIG_SHIELD_TOMAK79_RIGHT3)
   zephyr_library_sources(tomak79_right3_caps_num_led.c)
 endif()
 

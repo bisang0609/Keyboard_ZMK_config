@@ -42,8 +42,8 @@
 - `tomak79_right`는 underglow가 꺼진 뒤 다시 켜지지 않던 문제를 피하기 위해 강제 재시동 로직을 포함한 안정판이다.
 - `tomak79_right2`는 `right` 복제 기반의 기능 실험용 분기다.
 - `tomak79_right3`는 `right` 안정판 기반의 추가 실험용 분기다.
-- `tomak79_right3`의 `P0.09` 보조 LED 3개는 `nRF52 PWM + EasyDMA` 방식으로 분리 구동한다.
-- `tomak79_right3`의 `P0.09` LED 표시는 현재 `LED1=Caps`, `LED2=Caps/Num 요약`, `LED3=Num` 기준이다.
+- `tomak79_right`와 `tomak79_right3`의 `P0.09` 보조 LED 3개는 `nRF52 PWM + EasyDMA` 방식으로 분리 구동한다.
+- `tomak79_right`와 `tomak79_right3`의 `P0.09` LED 3개는 밝기 `30%` 고정의 느린 레인보우 흐름 효과를 사용한다.
 - `tomak79_dongle_ssd1306_block`는 SSD1306 안정화 기준 실드다.
 - `tomak79_dongle_ssh1106_encoder`는 SH1106 OLED와 엔코더를 포함한 현재 동글 주력 빌드다.
 - `tomak79_dongle_ssh1106_encoder`는 OLED에 `UG ON/OFF`를 표시하고, `Fn + ESC/F1..F6` underglow 제어를 포함한다.

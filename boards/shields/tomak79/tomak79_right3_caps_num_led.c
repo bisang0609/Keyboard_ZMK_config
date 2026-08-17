@@ -4,11 +4,6 @@
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
 
-#include <zmk/event_manager.h>
-#include <zmk/events/hid_indicators_changed.h>
-#include <zmk/hid.h>
-#include <zmk/hid_indicators.h>
-
 #ifdef OUT
 #undef OUT
 #endif
@@ -27,6 +22,7 @@ LOG_MODULE_REGISTER(tomak79_right3_caps_num_led, CONFIG_ZMK_LOG_LEVEL);
 #define MAGIC_T1H (0x8000 | 13U)
 #define PWM_COUNTERTOP_VALUE 20U
 #define PWM_SEQ_LEN ((CAPS_NUM_LED_COUNT * 3U * 8U) + 2U)
+#define LED_RESET_TIME_US 80U
 
 struct rgb_color {
     uint8_t r;
@@ -37,9 +33,10 @@ struct rgb_color {
 static struct rgb_color leds[CAPS_NUM_LED_COUNT];
 static uint16_t pwm_sequence[PWM_SEQ_LEN];
 static NRF_PWM_Type *const caps_num_pwm = NRF_PWM0;
+static int64_t rainbow_start_ms;
 
-static void tomak79_right3_caps_num_led_update_work(struct k_work *work);
-static K_WORK_DEFINE(caps_num_led_update_work, tomak79_right3_caps_num_led_update_work);
+static void tomak79_right3_caps_num_led_tick(struct k_work *work);
+static K_WORK_DELAYABLE_DEFINE(caps_num_led_tick_work, tomak79_right3_caps_num_led_tick);
 
 static void caps_num_pwm_init(void) {
     caps_num_pwm->ENABLE = 0;
@@ -85,6 +82,11 @@ static void fill_pwm_sequence(const struct rgb_color *pixels, size_t count) {
 static void write_pixels(const struct rgb_color *pixels, size_t count) {
     fill_pwm_sequence(pixels, count);
 
+    /* Hold the line low long enough for the SK6812 latch before each frame. */
+    nrf_gpio_cfg_output(CAPS_NUM_LED_PIN);
+    nrf_gpio_pin_clear(CAPS_NUM_LED_PIN);
+    k_busy_wait(LED_RESET_TIME_US);
+
     caps_num_pwm->EVENTS_SEQEND[0] = 0;
     caps_num_pwm->ENABLE = 1;
     caps_num_pwm->TASKS_SEQSTART[0] = 1;
@@ -95,49 +97,69 @@ static void write_pixels(const struct rgb_color *pixels, size_t count) {
 
     caps_num_pwm->EVENTS_SEQEND[0] = 0;
     caps_num_pwm->ENABLE = 0;
+
+    /* Reclaim the pin as GPIO low so the LEDs can latch the transmitted frame. */
+    nrf_gpio_cfg_output(CAPS_NUM_LED_PIN);
+    nrf_gpio_pin_clear(CAPS_NUM_LED_PIN);
+    k_busy_wait(LED_RESET_TIME_US);
 }
 
-static void update_caps_num_leds(zmk_hid_indicators_t indicators) {
-    const bool caps_on = (indicators & HID_KBD_LED_CAPS_LOCK) != 0U;
-    const bool num_on = (indicators & HID_KBD_LED_NUM_LOCK) != 0U;
+static struct rgb_color hsv_to_rgb(uint16_t hue_deg, uint8_t value) {
+    const uint16_t region = (hue_deg / 60U) % 6U;
+    const uint16_t remainder = hue_deg % 60U;
+    const uint16_t rising = (uint16_t)((value * remainder) / 60U);
+    const uint16_t falling = (uint16_t)((value * (60U - remainder)) / 60U);
+    struct rgb_color color = {0};
 
-    memset(leds, 0, sizeof(leds));
-
-    if (caps_on) {
-        leds[0].r = LED_BRIGHTNESS;
+    switch (region) {
+    case 0:
+        color.r = value;
+        color.g = rising;
+        break;
+    case 1:
+        color.r = falling;
+        color.g = value;
+        break;
+    case 2:
+        color.g = value;
+        color.b = rising;
+        break;
+    case 3:
+        color.g = falling;
+        color.b = value;
+        break;
+    case 4:
+        color.r = rising;
+        color.b = value;
+        break;
+    default:
+        color.r = value;
+        color.b = falling;
+        break;
     }
 
-    if (num_on) {
-        leds[2].b = LED_BRIGHTNESS;
-    }
+    return color;
+}
 
-    if (caps_on && num_on) {
-        leds[1].r = LED_BRIGHTNESS;
-        leds[1].b = LED_BRIGHTNESS;
-    } else if (caps_on) {
-        leds[1].r = LED_BRIGHTNESS;
-    } else if (num_on) {
-        leds[1].b = LED_BRIGHTNESS;
+static void update_rainbow_frame(void) {
+    const int64_t now_ms = k_uptime_get();
+    const uint32_t elapsed_ms = (uint32_t)(now_ms - rainbow_start_ms);
+    const uint16_t base_hue = (uint16_t)((elapsed_ms % 12000U) * 360U / 12000U);
+
+    for (size_t i = 0; i < CAPS_NUM_LED_COUNT; i++) {
+        /* Make the 3 LEDs look like one short strip with a moving rainbow gradient. */
+        const uint16_t hue = (uint16_t)((base_hue + (i * 40U)) % 360U);
+        leds[i] = hsv_to_rgb(hue, LED_BRIGHTNESS);
     }
 
     write_pixels(leds, CAPS_NUM_LED_COUNT);
 }
 
-static void tomak79_right3_caps_num_led_update_work(struct k_work *work) {
+static void tomak79_right3_caps_num_led_tick(struct k_work *work) {
     ARG_UNUSED(work);
 
-    update_caps_num_leds(zmk_hid_indicators_get_current_profile());
-}
-
-static int tomak79_right3_caps_num_led_listener(const zmk_event_t *eh) {
-    const struct zmk_hid_indicators_changed *ev = as_zmk_hid_indicators_changed(eh);
-
-    if (ev == NULL) {
-        return ZMK_EV_EVENT_BUBBLE;
-    }
-
-    k_work_submit(&caps_num_led_update_work);
-    return ZMK_EV_EVENT_BUBBLE;
+    update_rainbow_frame();
+    k_work_schedule(&caps_num_led_tick_work, K_MSEC(40));
 }
 
 static int tomak79_right3_caps_num_led_init(void) {
@@ -145,11 +167,10 @@ static int tomak79_right3_caps_num_led_init(void) {
     nrf_gpio_pin_clear(CAPS_NUM_LED_PIN);
 
     caps_num_pwm_init();
-    update_caps_num_leds(zmk_hid_indicators_get_current_profile());
+    rainbow_start_ms = k_uptime_get();
+    update_rainbow_frame();
+    k_work_schedule(&caps_num_led_tick_work, K_MSEC(40));
     return 0;
 }
-
-ZMK_LISTENER(tomak79_right3_caps_num_led_listener, tomak79_right3_caps_num_led_listener);
-ZMK_SUBSCRIPTION(tomak79_right3_caps_num_led_listener, zmk_hid_indicators_changed);
 
 SYS_INIT(tomak79_right3_caps_num_led_init, APPLICATION, CONFIG_APPLICATION_INIT_PRIORITY);

@@ -1,9 +1,9 @@
 /home/bisang0609/ZMK_Keyboard/Keyboard_ZMK_config/boards/shields/tomak79/Kconfig.defconfig
 /home/bisang0609/ZMK_Keyboard/Keyboard_ZMK_config/boards/shields/tomak79/Kconfig.shield
-/home/bisang0609/ZMK_Keyboard/build/tomak79_right3/Kconfig/Kconfig.dts
-/home/bisang0609/ZMK_Keyboard/build/tomak79_right3/Kconfig/Kconfig.modules
-/home/bisang0609/ZMK_Keyboard/build/tomak79_right3/Kconfig/Kconfig.shield
-/home/bisang0609/ZMK_Keyboard/build/tomak79_right3/Kconfig/Kconfig.shield.defconfig
+/home/bisang0609/ZMK_Keyboard/Keyboard_ZMK_config/build/test/tomak79_right3/Kconfig/Kconfig.dts
+/home/bisang0609/ZMK_Keyboard/Keyboard_ZMK_config/build/test/tomak79_right3/Kconfig/Kconfig.modules
+/home/bisang0609/ZMK_Keyboard/Keyboard_ZMK_config/build/test/tomak79_right3/Kconfig/Kconfig.shield
+/home/bisang0609/ZMK_Keyboard/Keyboard_ZMK_config/build/test/tomak79_right3/Kconfig/Kconfig.shield.defconfig
 /home/bisang0609/ZMK_Keyboard/modules/debug/percepio/DFM/kernelports/Zephyr/Kconfig
 /home/bisang0609/ZMK_Keyboard/modules/debug/percepio/DFM/kernelports/Zephyr/storageports/Flash/Kconfig
 /home/bisang0609/ZMK_Keyboard/modules/debug/percepio/TraceRecorder/config/Kconfig
