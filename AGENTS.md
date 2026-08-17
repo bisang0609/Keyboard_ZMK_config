@@ -84,7 +84,6 @@ ZMK 본체, Zephyr, modules를 수정해서 문제를 해결하지 않는다.
 
 아래 항목은 저장소에 포함하지 않는다.
 
-- `build/`
 - `*.uf2`
 - `*.hex`
 - `*.elf`
@@ -111,6 +110,11 @@ ZMK 본체, Zephyr, modules를 수정해서 문제를 해결하지 않는다.
 - `build/tomak79_dongle_ssd1306_block/`
 - `build/tomak79_dongle_ssh1106_encoder/`
 - `build/tomak79_dongle_yads_encoder/`
+
+현재 저장소 내부 `build/`는 사용자 요청으로 Git에 포함하며, 아래 구조로 관리한다.
+
+- `build/origin/`: 보존본, 직접 수정 금지
+- `build/test/`: 작업용 빌드 폴더, 저장소 내부 테스트 빌드는 여기만 사용
 
 `build/` 전체 삭제, 일괄 정리, 산출물 폴더 비우기는 사용자 요청이 있더라도 보존 대상 산출물 범위를 먼저 확인한 뒤 진행한다.
 
